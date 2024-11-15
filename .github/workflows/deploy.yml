@@ -29,7 +29,7 @@ jobs:
       uses: google-github-actions/deploy-cloudrun@v1
       with:
         service: note-api-${{ secrets.ORG_NAME }}
-        image: gcr.io/${{ secrets.GCP_PROJECT_ID }}/note-api:${{ github.sha }}
+        image: ghcr.io/hs-heilbronn-devsecops-group-one/note-api:latest
         region: us-central1
         env_vars: BACKEND=memory
 
