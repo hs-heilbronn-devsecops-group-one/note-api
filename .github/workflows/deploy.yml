@@ -44,5 +44,5 @@ jobs:
         with:
           service: note-api-${{ secrets.ORG_NAME }}
           image: gcr.io/${{ secrets.GCP_PROJECT_ID }}/note-api:${{ github.sha }}
-          region: us-central1
+          region: us-west1
           env_vars: BACKEND=memory
