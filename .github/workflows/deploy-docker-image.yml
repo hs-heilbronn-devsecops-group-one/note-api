@@ -35,8 +35,8 @@ jobs:
       # Step 5: Push Docker image to GCR
       - name: Push Docker image
         run: |
-          IMAGE=gcr.io/${{ secrets.GCP_PROJECT_ID }}/note-api:${{ github.sha }}
-          docker push $IMAGE
+            IMAGE=us-west1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/noteapi-docker-repo/note-api:${{ github.sha }}
+            docker push $IMAGE
 
       # Step 6: Deploy to Cloud Run
       - name: Deploy to Cloud Run
