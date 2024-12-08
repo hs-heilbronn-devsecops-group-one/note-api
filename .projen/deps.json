@@ -5,10 +5,6 @@
       "type": "devenv"
     },
     {
-      "name": "coverage_enable_subprocess",
-      "type": "devenv"
-    },
-    {
       "name": "fakeredis",
       "type": "devenv"
     },
@@ -50,6 +46,22 @@
     },
     {
       "name": "google-cloud-storage",
+      "type": "runtime"
+    },
+    {
+      "name": "opentelemetry-api",
+      "type": "runtime"
+    },
+    {
+      "name": "opentelemetry-exporter-gcp-trace",
+      "type": "runtime"
+    },
+    {
+      "name": "opentelemetry-instrumentation-fastapi",
+      "type": "runtime"
+    },
+    {
+      "name": "opentelemetry-sdk",
       "type": "runtime"
     },
     {

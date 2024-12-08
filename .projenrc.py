@@ -15,7 +15,11 @@ project = PythonProject(
         'pytest-xdist',
         'pytest-xdist[psutil]',
         'fakeredis[json]',
-        'fakeredis'
+        'fakeredis',
+        'opentelemetry-api',
+        'opentelemetry-sdk',
+        'opentelemetry-instrumentation-fastapi',
+        'opentelemetry-exporter-gcp-trace'
     ],
     dev_deps=[
         'attrs',
