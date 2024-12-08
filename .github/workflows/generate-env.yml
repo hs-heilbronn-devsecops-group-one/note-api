@@ -1,0 +1,13 @@
+name: Generate environment variables from Github secrets
+run-name: ${{ github.actor }} is running
+on: [push]
+jobs:
+  build:  
+    runs-on: ubuntu-latest  
+    strategy:  
+      matrix:  
+        python-version: ["3.10"]
+    steps:
+      - name: Test env vars for python
+        run: TRACE_SECRET=${{ secrets.GCP_TRACE_SERVICE_KEY }} python -c 'import os;print(os.environ['TRACE_SECRET'])
+
