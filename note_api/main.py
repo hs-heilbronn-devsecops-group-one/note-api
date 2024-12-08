@@ -3,7 +3,6 @@ from uuid import uuid4
 from typing import List, Optional
 from os import getenv
 from typing_extensions import Annotated
-import os 
 
 from fastapi import Depends, FastAPI
 from opentelemetry import trace
@@ -14,7 +13,6 @@ from opentelemetry.instrumentation.fastapi import FastAPIInstrumentor
 from starlette.responses import RedirectResponse
 from .backends import Backend, RedisBackend, MemoryBackend, GCSBackend
 from .model import Note, CreateNoteRequest
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = '/workspaces/note-api/application_default_credentials.json'
 
 # Set up OpenTelemetry Tracer Provider
 trace.set_tracer_provider(TracerProvider())
