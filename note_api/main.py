@@ -15,6 +15,8 @@ from opentelemetry.instrumentation.fastapi import FastAPIInstrumentor
 from starlette.responses import RedirectResponse
 from .backends import Backend, RedisBackend, MemoryBackend, GCSBackend
 from .model import Note, CreateNoteRequest
+
+# setting ENV variables
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = ENV.Constants.GCP_TRACE_SERVICE_KEY
 
 # Set up OpenTelemetry Tracer Provider
