@@ -30,7 +30,7 @@ jobs:
       - name: Build Docker image
         run: |
           IMAGE=gcr.io/${{ secrets.GCP_PROJECT_ID }}/note-api:${{ github.sha }}
-          docker build -t $IMAGE .
+          docker build --platform linux/amd64 -t $IMAGE .
 
       # Step 5: Push Docker image to GCR
       - name: Push Docker image
