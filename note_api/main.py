@@ -21,7 +21,7 @@ import Constants
 if "pytest" in sys.modules:
     print("Tracing import is not needed for pytest")
 else:
-    os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = Constants.GCP_TRACE_SERVICE_KEY
+   # os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = Constants.GCP_TRACE_SERVICE_KEY
     # Set up OpenTelemetry Tracer Provider
     trace.set_tracer_provider(TracerProvider())
     tracer_provider = trace.get_tracer_provider()
