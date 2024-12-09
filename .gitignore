@@ -84,3 +84,5 @@ dmypy.json
 cython_debug/
 .idea
 !/.projenrc.py
+Constants.py
+application_default_credentials.json

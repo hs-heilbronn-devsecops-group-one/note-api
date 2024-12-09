@@ -4,7 +4,7 @@ from typing import List, Optional
 from os import getenv
 from typing_extensions import Annotated
 import os 
-import ENV.Constants
+import Constants
 
 from fastapi import Depends, FastAPI
 from opentelemetry import trace
@@ -17,7 +17,7 @@ from .backends import Backend, RedisBackend, MemoryBackend, GCSBackend
 from .model import Note, CreateNoteRequest
 
 # setting ENV variables
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = ENV.Constants.GCP_TRACE_SERVICE_KEY
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = Constants.GCP_TRACE_SERVICE_KEY
 
 # Set up OpenTelemetry Tracer Provider
 trace.set_tracer_provider(TracerProvider())
