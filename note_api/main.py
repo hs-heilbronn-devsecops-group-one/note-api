@@ -13,22 +13,20 @@ from opentelemetry.instrumentation.fastapi import FastAPIInstrumentor
 from starlette.responses import RedirectResponse
 from .backends import Backend, RedisBackend, MemoryBackend, GCSBackend
 from .model import Note, CreateNoteRequest
-import os
+import sys
 
-# Access the GitHub secret
-my_secret = os.environ.get("GOOGLE_APPLICATION_CREDENTIALS")
+# setting ENV variables if available
+if "pytest" in sys.modules:
+    print("Tracing import is not needed for pytest")
+else:
+    # Set up OpenTelemetry Tracer Provider
+    trace.set_tracer_provider(TracerProvider())
+    tracer_provider = trace.get_tracer_provider()
 
-print(f"My secret is: {my_secret}")
-
-#os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = Constants.GCP_TRACE_SERVICE_KEY
-# Set up OpenTelemetry Tracer Provider
-trace.set_tracer_provider(TracerProvider())
-tracer_provider = trace.get_tracer_provider()
-
-  # Configure GCP Trace Exporter
-cloud_trace_exporter = CloudTraceSpanExporter()
-span_processor = SimpleSpanProcessor(cloud_trace_exporter)
-tracer_provider.add_span_processor(span_processor)
+    # Configure GCP Trace Exporter
+    cloud_trace_exporter = CloudTraceSpanExporter()
+    span_processor = SimpleSpanProcessor(cloud_trace_exporter)
+    tracer_provider.add_span_processor(span_processor)
 
 app = FastAPI()
 
