@@ -5,39 +5,11 @@ from os import getenv
 from typing_extensions import Annotated
 
 from fastapi import Depends, FastAPI
-from opentelemetry import trace
-from opentelemetry.exporter.cloud_trace import CloudTraceSpanExporter
-from opentelemetry.sdk.trace import TracerProvider
-from opentelemetry.sdk.trace.export import SimpleSpanProcessor
-from opentelemetry.instrumentation.fastapi import FastAPIInstrumentor
 from starlette.responses import RedirectResponse
 from .backends import Backend, RedisBackend, MemoryBackend, GCSBackend
 from .model import Note, CreateNoteRequest
-import sys
-import os 
-import Constants
-
-# setting ENV variables if available
-if "pytest" in sys.modules:
-    print("Tracing import is not needed for pytest")
-else:
-   # os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = Constants.GCP_TRACE_SERVICE_KEY
-    # Set up OpenTelemetry Tracer Provider
-    trace.set_tracer_provider(TracerProvider())
-    tracer_provider = trace.get_tracer_provider()
-
-    # Configure GCP Trace Exporter
-    cloud_trace_exporter = CloudTraceSpanExporter()
-    span_processor = SimpleSpanProcessor(cloud_trace_exporter)
-    tracer_provider.add_span_processor(span_processor)
 
 app = FastAPI()
-
-# Initialize the tracer
-tracer = trace.get_tracer(__name__)
-
-# Instrument FastAPI
-FastAPIInstrumentor.instrument_app(app)
 
 my_backend: Optional[Backend] = None
 
@@ -74,19 +46,7 @@ def get_notes(backend: Annotated[Backend, Depends(get_backend)]) -> List[Note]:
 @app.get('/notes/{note_id}')
 def get_note(note_id: str,
              backend: Annotated[Backend, Depends(get_backend)]) -> Note:
-    # Create a custom span
-    with tracer.start_as_current_span("get_note_using_id") as span:
-        # Add attributes to the span
-        span.set_attribute("note_id", note_id)
-        span.set_attribute("operation", "fetch_note")
-
-        # Call the backend to retrieve the note
-        note = backend.get(note_id)
-
-        # Optionally, add events to the span
-        span.add_event("Fetched note from backend")
-
-        return note
+    return backend.get(note_id)
 
 
 @app.put('/notes/{note_id}')
