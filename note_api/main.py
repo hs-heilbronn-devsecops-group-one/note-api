@@ -3,8 +3,6 @@ from uuid import uuid4
 from typing import List, Optional
 from os import getenv
 from typing_extensions import Annotated
-import os 
-import Constants
 
 from fastapi import Depends, FastAPI
 from opentelemetry import trace
@@ -16,6 +14,8 @@ from starlette.responses import RedirectResponse
 from .backends import Backend, RedisBackend, MemoryBackend, GCSBackend
 from .model import Note, CreateNoteRequest
 import sys
+import os 
+import Constants
 
 # setting ENV variables if available
 if "pytest" in sys.modules:

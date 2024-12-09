@@ -38,6 +38,10 @@ jobs:
             IMAGE=gcr.io/${{ secrets.GCP_PROJECT_ID }}/note-api:${{ github.sha }}
             docker push $IMAGE
 
+      - run: |
+            sudo apt-get install python2.7
+            export CLOUDSDK_PYTHON="/usr/bin/python2"
+
       # Step 6: Deploy to Cloud Run
       - name: Deploy to Cloud Run
         uses: google-github-actions/deploy-cloudrun@v1
