@@ -1,1 +1,0 @@
-GCP_TRACE_SERVICE_KEY='/workspaces/note-api/application_default_credentials.json'
