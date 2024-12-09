@@ -16,8 +16,11 @@ from starlette.responses import RedirectResponse
 from .backends import Backend, RedisBackend, MemoryBackend, GCSBackend
 from .model import Note, CreateNoteRequest
 
-# setting ENV variables
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = Constants.GCP_TRACE_SERVICE_KEY
+# setting ENV variables if available
+try:
+  os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = Constants.GCP_TRACE_SERVICE_KEY
+except:
+  print("ENV variables not found")
 
 # Set up OpenTelemetry Tracer Provider
 trace.set_tracer_provider(TracerProvider())
