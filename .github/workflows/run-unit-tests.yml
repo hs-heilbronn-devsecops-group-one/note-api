@@ -1,5 +1,5 @@
 name: Run Unit Test via Pytest
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+run-name: ${{ github.actor }} running Github actions 🚀
 on: [push]
 jobs:
   build:  
